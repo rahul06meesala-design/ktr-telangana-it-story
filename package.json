@@ -1,0 +1,27 @@
+{
+  "name": "ktr-telangana-it-story",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion documentary: KTR - Telangana IT Story (63-shot, data-driven)",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "preview": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts KTRDocumentary out/KTR-Telangana-IT-Story.mp4",
+    "render:fast": "remotion render src/index.ts KTRDocumentary out/KTR-Telangana-IT-Story.mp4 --concurrency=4",
+    "still": "remotion still src/index.ts KTRDocumentary out/thumbnail.png",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.190",
+    "@remotion/google-fonts": "4.0.190",
+    "@remotion/transitions": "4.0.190",
+    "@remotion/media-utils": "4.0.190",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.190"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.1",
+    "typescript": "5.5.4"
+  }
+}
