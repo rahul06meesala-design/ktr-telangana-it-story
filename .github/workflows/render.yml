@@ -1,0 +1,49 @@
+name: Render KTR Documentary
+
+# Runs automatically whenever you push to main (e.g. after uploading new
+# assets from GitHub's web UI or mobile app), and can also be triggered
+# manually from the Actions tab with the "Run workflow" button.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Chrome headless-shell for Remotion
+        run: npx remotion browser ensure
+
+      - name: Render final MP4
+        run: npm run render
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: KTR-Telangana-IT-Story
+          path: out/KTR-Telangana-IT-Story.mp4
+          retention-days: 30
+
+      - name: Render thumbnail still
+        run: npm run still
+
+      - name: Upload thumbnail
+        uses: actions/upload-artifact@v4
+        with:
+          name: thumbnail
+          path: out/thumbnail.png
+          retention-days: 30
